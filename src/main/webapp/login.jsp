@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
 
@@ -28,16 +29,18 @@
                     $.ajax({
                         url: "${pageContext.request.contextPath}/user/login",
                         type: "post",//get会在浏览器显示具体参数,如果测试参数是否拼接过去用get测试一下
-                        data: "vuUserName=" + $("#name1").val() + "&amp;vuPassword=" + $("#psd1").val(),
+                        data: "vuUserName=" + $("#name1").val() + "&vuPassword=" + $("#psd1").val(),
                         dataType: "json",
                         success: function (json) {
                             console.log("map=" + json.key);
                             var pa = json.key;
+                            console.log(json);
                             if (pa == "yes") {
-                                alert(json.key);
+                                alert("y");
                                 console.log(json);
                                 location.href = "${pageContext.request.contextPath}/index.jsp";
                             } else {
+                                alert("w");
                                 location.href = "${pageContext.request.contextPath}/login.jsp";
                             }
                         }
@@ -66,7 +69,7 @@
             <h2>用户登录</h2>
 
             <%-- //<form action="${pageContext.request.contextPath}/user/login.do"> --%>
-            <dl id="loginBox">
+            <dl id="loginBox1">
                 <dt>用户名：</dt>
                 <dd><input type="text" id="name1" class="easyui-validatebox" data-options="required:true"
                            name="vuUserName" value=""/></dd>
@@ -74,7 +77,7 @@
                 <dd><input type="password" id="psd1" class="easyui-validatebox" data-options="required:true"
                            name="vuPassword" value=""/></dd>
                 <dt></dt>
-                <dd><a id="dl">登录</a>
+                <dd><input type="button" value="登录" id="dl"/>
                     <a id="aa1" href="#">新用户注册</a></dd>
             </dl>
             <!-- </form> -->
