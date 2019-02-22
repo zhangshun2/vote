@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.bb.dao.VoteWeihuDao">
+    <select id="selectAll" resultType="VoteWeihu">
+        select v3.vs_id as id,vs_title as title,vs_type,count as optionNum,man as toupiaoNum
+        from
+            ((select v1.vs_id as vs_id,vi_id as man,vs_title,vs_type
+              from vote_subject v1
+                       left join vote_item v2 on v1.vs_id = v2.vs_id) v3
+                left join
+                    (select vs_id,count(vs_id) as count from vote_option group by vs_id) v4 on v3.vs_id = v4.vs_id) limit
+            #{start},
+            #{end}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete
+        from vote_subject
+        where vs_id = #{id}
+    </delete>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(vs_id)
+        from vote_subject
+    </select>
+</mapper>
