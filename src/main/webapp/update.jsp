@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <link type="text/css" rel="stylesheet" href="css/style.css"/>
 <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <jsp:include page="comm/comm_jQueryUI_js.jsp"/>

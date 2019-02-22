@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
-<script type="text/javascript" src="js/j.js"></script>
-<script type="text/javascript" src="js/jqueryui/jquery.ui.resizable.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/j.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jqueryui/jquery.ui.resizable.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/themes/IconExtension.css">
 <link rel="stylesheet" type="text/css"
@@ -25,15 +25,15 @@
                 </dd>
                 <dt>投票选项：</dt>
                 <dd id="voteoptions">
-                    <p><input type="text" class="input-text" name="options[0].voOption"/></p>
-                    <p><input type="text" class="input-text" name="options[1].voOption"/></p>
+                    <p><input id="voteOption1" type="text" class="input-text" name="options[0].voOption"/></p>
+                    <p><input id="voteOption2" type="text" class="input-text" name="options[1].voOption"/></p>
                 </dd>
                 <dt></dt>
                 <dd class="button">
 
                     <a id="btn1">确定</a>
                     <a id="addOption" href="javascript:void(0);">增加选项</a>
-                    <a href="subject!list.action">取消操作</a>
+                    <a href="${pageContext.request.contextPath}/index.jsp">取消操作</a>
                 </dd>
             </dl>
         </form>
@@ -43,6 +43,15 @@
     <p>投票内容不能为空</p>
 </div>
 <script>
+    $("#voteTitle").validatebox({
+        required: true,
+    });
+    $("#voteOption1").validatebox({
+        required: true,
+    });
+    $("#voteOption2").validatebox({
+        required: true,
+    });
 
     var number = 2;
 
@@ -63,12 +72,12 @@
         $("#voteoptions").append($p);
     });
 
-    function validate() {
+    /*function validate() {
         var voteTitle = $('#voteTitle').val();
 
         return validateTitle(voteTitle);
 
-    }
+    }*/
 
     function validateTitle(v) {
         if (null == v || '' == v) {
@@ -92,10 +101,11 @@
 
         /* 添加具体的信息 */
         /* 点击添加按钮提交 */
+
         $("#btn1").linkbutton({
             onClick: function () {
                 $("#formgo").form("submit");
-                location.href = "add_success.jsp";
+                location.href = "${pageContext.request.contextPath}/add_success.jsp";
             }
         });
 

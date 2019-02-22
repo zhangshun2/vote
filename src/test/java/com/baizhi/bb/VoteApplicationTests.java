@@ -24,5 +24,9 @@ public class VoteApplicationTests {
         System.out.println(voteSubjectService.selectVoteSubject());
     }
 
+    @Test
+    public void test() {
+        System.out.println(12);
+    }
 
 }

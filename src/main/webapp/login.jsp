@@ -29,14 +29,14 @@
                     $.ajax({
                         url: "${pageContext.request.contextPath}/user/login",
                         type: "post",//get会在浏览器显示具体参数,如果测试参数是否拼接过去用get测试一下
-                        data: "vuUserName=" + $("#name1").val() + "&vuPassword=" + $("#psd1").val(),
+                        data: "vuUserName=" + $("#name1").val() + '&vuPassword=' + $("#psd1").val(),
                         dataType: "json",
                         success: function (json) {
                             console.log("map=" + json.key);
                             var pa = json.key;
                             console.log(json);
                             if (pa == "yes") {
-                                alert("y");
+                                //alert("y");
                                 console.log(json);
                                 location.href = "${pageContext.request.contextPath}/index.jsp";
                             } else {

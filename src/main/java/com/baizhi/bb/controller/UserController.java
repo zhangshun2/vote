@@ -14,7 +14,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
+    
     @Autowired
     private VoteUserService voteUserService;
 

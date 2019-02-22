@@ -71,28 +71,15 @@ public class SubjectController {
         System.out.println(options);
         System.out.println(subject);
         System.out.println("=====================");
-        /**
-         * дһ��map����������Ϣ
-         */
+
         Map<String, Object> map = new HashMap<>();
-        if (subject == null && subject.getVsTitle() == "") {
-
+        if (subject == null || subject.getVsTitle().equals("") || voteSubDTO.getOptions() == null) {
             map.put("no", "param is null");
-
         } else {
 
-            /**
-             * ���봫������ͶƱ����
-             * ������
-             */
             voteSubjectService.insertNonEmptyVoteSubject(subject);
-            /**
-             * ��,�����дnotnull���������
-             */
+
             VoteSubject subject2 = voteSubjectService.selectVoteSubjectByObj(subject);
-            /**
-             * �õ���Ӧ��id����һ�����ͶƱ�����,
-             */
 
             Integer vsId = subject2.getVsId();
 
