@@ -1,0 +1,7 @@
+localhost:3306
+root
+123456
+
+表名：baobiao
+
+建表语句见本目录其他文件

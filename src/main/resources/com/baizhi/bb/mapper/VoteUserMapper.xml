@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.bb.dao.VoteUserDao">
+    <!-- VoteUser的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_VoteUser_Map" type="com.baizhi.bb.entity.VoteUser">
+        <id column="vu_user_id" property="vuUserId"/>
+        <result column="vu_user_name" property="vuUserName"/>
+        <result column="vu_password" property="vuPassword"/>
+        <result column="vu_status" property="vuStatus"/>
+    </resultMap>
+
+    <!-- 数据库中表名为:vote_user的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="vote_user_Column">
+       *
+    </sql>
+
+    <!--获得类名为:VoteUser对应的数据库表的数据总行数 -->
+    <select id="getVoteUserRowCount" resultType="java.lang.Long">
+        select count(vu_user_id) from vote_user
+    </select>
+    <!-- 获得类名为:VoteUser对应数据库中表的数据集合 -->
+    <select id="selectVoteUser" resultMap="result_VoteUser_Map">
+        select
+        <include refid="vote_user_Column"/>
+        from vote_user
+    </select>
+
+    <!-- 获得一个VoteUser对象,以参数VoteUser对象中不为空的属性作为条件进行查询-->
+    <select id="selectVoteUserByObj" parameterType="com.baizhi.bb.entity.VoteUser" resultMap="result_VoteUser_Map">
+        select
+        <include refid="vote_user_Column"/>
+        from vote_user
+        <where>
+            <if test="vuStatus != null ">and vote_user.vu_status = #{vuStatus}</if>
+            <if test="vuPassword != null ">and vote_user.vu_password = #{vuPassword}</if>
+            <if test="vuUserName != null ">and vote_user.vu_user_name = #{vuUserName}</if>
+            <if test="vuUserId != null ">and vote_user.vu_user_id = #{vuUserId}</if>
+        </where>
+    </select>
+
+    <!-- 通过VoteUser的id获得对应数据库中表的数据对象-->
+    <select id="selectVoteUserById" parameterType="java.lang.Integer" resultMap="result_VoteUser_Map">
+        select
+        <include refid="vote_user_Column"/>
+        from vote_user
+        where vote_user.vu_user_id = #{id}
+    </select>
+
+    <!-- 将VoteUser插入到对应数据库的表中,包括属性值为null的数据-->
+
+    <insert id="insertVoteUser" parameterType="com.baizhi.bb.entity.VoteUser">
+        insert into vote_user(vu_user_id,vu_user_name,vu_password,vu_status) 
+        values(0,#{vuUserName},#{vuPassword},#{vuStatus})
+    </insert>
+
+    <!-- 将VoteUser中属性值不为null的数据,插入到对应数据库的表中-->
+    <insert id="insertNonEmptyVoteUser" parameterType="com.baizhi.bb.entity.VoteUser">
+        insert into vote_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vuUserId != null">vu_user_id,</if>
+            <if test="vuUserName != null">vu_user_name,</if>
+            <if test="vuPassword != null">vu_password,</if>
+            <if test="vuStatus != null">vu_status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vuUserId != null">0,</if>
+            <if test="vuUserName != null">#{vuUserName},</if>
+            <if test="vuPassword != null">#{vuPassword},</if>
+            <if test="vuStatus != null">#{vuStatus},</if>
+        </trim>
+    </insert>
+
+    <!-- 通过VoteUser的id将数据库表中对应的数据删除-->
+    <delete id="deleteVoteUserById" parameterType="java.lang.Integer">
+        delete from vote_user
+        where vu_user_id = #{id}
+    </delete>
+
+    <!-- 通过VoteUser的id将VoteUser的数据更新到数据库中对应的表,包括值null的数据-->
+    <update id="updateVoteUserById" parameterType="com.baizhi.bb.entity.VoteUser">
+        update vote_user set
+            vu_user_name=#{vuUserName}
+            ,vu_password=#{vuPassword}
+            ,vu_status=#{vuStatus}
+        where vu_user_id=#{vuUserId}
+    </update>
+
+    <!-- 通过VoteUser的id将VoteUser中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyVoteUserById" parameterType="com.baizhi.bb.entity.VoteUser">
+        update vote_user
+        <set>
+            <if test="vuUserName != null">
+                vu_user_name=#{vuUserName},
+            </if>
+            <if test="vuPassword != null">
+                vu_password=#{vuPassword},
+            </if>
+            <if test="vuStatus != null">
+                vu_status=#{vuStatus},
+            </if>
+        </set>
+        where vu_user_id=#{vuUserId}
+    </update>
+
+</mapper>

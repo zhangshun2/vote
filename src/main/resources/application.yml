@@ -1,0 +1,30 @@
+#server 重新配置端口号,项目名和热部署
+server:
+
+  jsp-servlet:
+    init-parameters:
+      development: true
+
+spring:
+
+  #视图解析器的动态参数
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 200MB
+  profiles:
+    active: test
+
+
+
+
+mybatis:
+  mapper-locations: classpath:com/baizhi/bb/mapper/*.xml
+  type-aliases-package: com.baizhi.bb.entity  # 注意：对应实体类的路径

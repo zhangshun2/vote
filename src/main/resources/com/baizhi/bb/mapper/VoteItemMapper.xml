@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.bb.dao.VoteItemDao">
+    <!-- VoteItem的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_VoteItem_Map" type="com.baizhi.bb.entity.VoteItem">
+        <id column="vi_id" property="viId"/>
+        <result column="vi_user_id" property="viUserId"/>
+        <result column="vs_id" property="vsId"/>
+        <result column="vo_id" property="voId"/>
+    </resultMap>
+
+
+    <!-- 数据库中表名为:vote_item的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="vote_item_Column">
+       *
+    </sql>
+
+    <!--获得类名为:VoteItem对应的数据库表的数据总行数 -->
+    <select id="getVoteItemRowCount" resultType="java.lang.Long">
+        select count(vi_id) from vote_item
+    </select>
+    <!-- 获得类名为:VoteItem对应数据库中表的数据集合 -->
+    <select id="selectVoteItem" resultMap="result_VoteItem_Map">
+        select
+        <include refid="vote_item_Column"/>
+        from vote_item
+    </select>
+
+    <!-- 获得一个VoteItem对象,以参数VoteItem对象中不为空的属性作为条件进行查询-->
+    <select id="selectVoteItemByObj" parameterType="com.baizhi.bb.entity.VoteItem" resultMap="result_VoteItem_Map">
+        select
+        <include refid="vote_item_Column"/>
+        from vote_item
+        <where>
+            <if test="voId != null ">and vote_item.vo_id = #{voId}</if>
+            <if test="vsId != null ">and vote_item.vs_id = #{vsId}</if>
+            <if test="viUserId != null ">and vote_item.vi_user_id = #{viUserId}</if>
+            <if test="viId != null ">and vote_item.vi_id = #{viId}</if>
+        </where>
+    </select>
+
+    <!-- 通过VoteItem的id获得对应数据库中表的数据对象-->
+    <select id="selectVoteItemById" parameterType="java.lang.Integer" resultMap="result_VoteItem_Map">
+        select
+        <include refid="vote_item_Column"/>
+        from vote_item
+        where vote_item.vi_id = #{id}
+    </select>
+
+    <!-- 将VoteItem插入到对应数据库的表中,包括属性值为null的数据-->
+
+    <insert id="insertVoteItem" parameterType="com.baizhi.bb.entity.VoteItem">
+        insert into vote_item(vi_id,vi_user_id,vs_id,vo_id) 
+        values(#{viId},#{viUserId},#{vsId},#{voId})
+    </insert>
+
+    <!-- 将VoteItem中属性值不为null的数据,插入到对应数据库的表中-->
+    <insert id="insertNonEmptyVoteItem" parameterType="com.baizhi.bb.entity.VoteItem">
+        insert into vote_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="viId != null">vi_id,</if>
+            <if test="viUserId != null">vi_user_id,</if>
+            <if test="vsId != null">vs_id,</if>
+            <if test="voId != null">vo_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="viId != null">#{viId},</if>
+            <if test="viUserId != null">#{viUserId},</if>
+            <if test="vsId != null">#{vsId},</if>
+            <if test="voId != null">#{voId},</if>
+        </trim>
+    </insert>
+
+    <!-- 通过VoteItem的id将数据库表中对应的数据删除-->
+    <delete id="deleteVoteItemById" parameterType="java.lang.Integer">
+        delete from vote_item
+        where vi_id = #{id}
+    </delete>
+
+    <!-- 通过VoteItem的id将VoteItem的数据更新到数据库中对应的表,包括值null的数据-->
+    <update id="updateVoteItemById" parameterType="com.baizhi.bb.entity.VoteItem">
+        update vote_item set
+             vi_user_id=#{viUserId}
+            ,vs_id=#{vsId}
+            ,vo_id=#{voId}
+        where vi_id=#{viId}
+    </update>
+
+    <!-- 通过VoteItem的id将VoteItem中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyVoteItemById" parameterType="com.baizhi.bb.entity.VoteItem">
+        update vote_item
+        <set>
+            <if test="viUserId != null">
+                vi_user_id=#{viUserId},
+            </if>
+            <if test="vsId != null">
+                vs_id=#{vsId},
+            </if>
+            <if test="voId != null">
+                vo_id=#{voId},
+            </if>
+        </set>
+        where vi_id=#{viId}
+    </update>
+
+</mapper>
