@@ -62,8 +62,7 @@ function indexGrid() {
 
 function manageGrid() {
     $('#manageGrid').datagrid({
-        url: 'getDatagrid.action',
-        //singleSelect:true,
+        url: 'subject/select?name=' + $("#manageKeywords").val(),
         rownumbers: true,
         iconCls: 'icon-search',
         pagination: true,//显示底部分页栏
@@ -72,14 +71,13 @@ function manageGrid() {
         fitColumns: true,//自适应宽度，防止水平滚动
         striped: true,//隔行变色
         columns: [[
-            {field: 'ck', checkbox: true},
-            {field: 'id', title: 'id', hidden: 'true'},
+            {field: 'viId', title: 'id', hidden: 'true'},
             {field: 'title', title: '投票标题', width: 300},
-            {field: 'options', title: '选项数', align: 'right'},
-            {field: 'participants', title: '投票人数', align: 'right'},
+            {field: 'count', title: '选项数', align: 'right'},
+            {field: 'people', title: '投票人数', align: 'right'},
             {
-                field: 'update', title: '操作', align: 'center', formatter: function () {
-                    return "<a herf='#' style='color:red;'>维护</a>";
+                field: 'opr', title: '操作', align: 'center', formatter: function () {
+                    return "<a  style='color:red;'>参加投票</a>";
                 }
             }
         ]],
@@ -89,6 +87,6 @@ function manageGrid() {
                 window.location.href = "subject!read.action?subject.id=" + id;
             }
         },
-        loadMsg: "姝ｅ姫鍔涗负鎮ㄥ姞杞戒腑......"
+        loadMsg: "..."
     });
 }
