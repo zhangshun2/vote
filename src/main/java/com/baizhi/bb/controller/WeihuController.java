@@ -46,4 +46,37 @@ public class WeihuController {
         map.put("msg", "删除成功");
         return map;
     }
+
+    @RequestMapping("selectById")
+    @ResponseBody
+    public Object selectById(Integer id) {
+        VoteWeihu voteWeihu = voteWeihuService.selectById(id);
+        if (voteWeihu.getToupiaoNum() == null) {
+            voteWeihu.setToupiaoNum(0);
+        }
+        if (voteWeihu.getOptionNum() == null) {
+            voteWeihu.setOptionNum(0);
+        }
+        return voteWeihu;
+    }
+
+    @RequestMapping("update")
+    public Object update() {
+        return "redirect:/hello.jsp";
+    }
+
+    @RequestMapping("search")
+    @ResponseBody
+    public Object search(VoteWeihu voteWeihu) {
+        List<VoteWeihu> list = voteWeihuService.select(voteWeihu);
+        for (VoteWeihu i : list) {
+            if (i.getOptionNum() == null) {
+                i.setOptionNum(0);
+            }
+            if (i.getToupiaoNum() == null) {
+                i.setToupiaoNum(0);
+            }
+        }
+        return list;
+    }
 }

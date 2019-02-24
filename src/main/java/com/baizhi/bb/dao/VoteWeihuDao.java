@@ -13,4 +13,10 @@ public interface VoteWeihuDao {
 
     //查询所有条数
     public Integer getCount();
+
+    VoteWeihu selectById(@Param("id") Integer id);
+
+    public void update();
+
+    List<VoteWeihu> select(VoteWeihu voteWeihu);
 }

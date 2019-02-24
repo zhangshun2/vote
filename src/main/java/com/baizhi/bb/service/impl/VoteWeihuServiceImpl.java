@@ -30,4 +30,16 @@ public class VoteWeihuServiceImpl implements VoteWeihuService {
         Integer count = voteWeihuDao.getCount();
         return count;
     }
+
+    @Override
+    public VoteWeihu selectById(Integer id) {
+        VoteWeihu voteWeihu = voteWeihuDao.selectById(id);
+        return voteWeihu;
+    }
+
+    @Override
+    public List<VoteWeihu> select(VoteWeihu voteWeihu) {
+        List<VoteWeihu> list = voteWeihuDao.select(voteWeihu);
+        return list;
+    }
 }

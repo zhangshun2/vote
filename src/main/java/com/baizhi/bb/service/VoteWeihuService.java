@@ -10,4 +10,8 @@ public interface VoteWeihuService {
     void delete(Integer id);
 
     Integer getCount();
+
+    VoteWeihu selectById(Integer id);
+
+    List<VoteWeihu> select(VoteWeihu voteWeihu);
 }

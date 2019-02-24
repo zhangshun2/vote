@@ -23,4 +23,31 @@
         select count(vs_id)
         from vote_subject
     </select>
+
+    <select id="selectById" resultType="VoteWeihu">
+        select v3.vs_id as id,vs_title as title,vs_type,count as optionNum,man as toupiaoNum
+        from
+            ((select v1.vs_id as vs_id,vi_id as man,vs_title,vs_type
+              from vote_subject v1
+                       left join vote_item v2 on v1.vs_id = v2.vs_id) v3
+                left join
+                    (select vs_id,count(vs_id) as count from vote_option group by vs_id) v4 on v3.vs_id = v4.vs_id)
+        where v3.vs_id = #{id}
+    </select>
+
+    <select id="select" resultType="VoteWeihu" parameterType="VoteWeihu">
+        select v3.vs_id as id,vs_title as title,vs_type,count as optionNum,man as toupiaoNum
+        from
+        ((select v1.vs_id as vs_id,vi_id as man,vs_title,vs_type
+        from vote_subject v1
+        left join vote_item v2 on v1.vs_id = v2.vs_id) v3
+        left join
+        (select vs_id,count(vs_id) as count from vote_option group by vs_id) v4 on v3.vs_id = v4.vs_id)
+        <where>
+            <if test="id!=null">v3.vs_id = #{id}</if>
+            <if test="title!=null">vs_title like "%${title}%"</if>
+            <if test="toupiaoNum!=null">man=#{toupiaoNum}</if>
+            <if test="optionNum!=null">"count"=#{optionNum}</if>
+        </where>
+    </select>
 </mapper>
