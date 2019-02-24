@@ -33,11 +33,26 @@
                             console.log("map=" + json.key);
                             var pa = json.key;
                             if (pa == "yes") {
-                                alert(json.key);
+                                //alert("y");
                                 console.log(json);
+                                $.messager.show({
+                                    msg: "注册成功"
+                                });
                                 location.href = "${pageContext.request.contextPath}/index.jsp";
-                            } else {
+                            } else if (pa == "no") {
+                                alert("no");
                                 location.href = "${pageContext.request.contextPath}/register.jsp";
+
+                                $.messager.show({
+                                    msg: "注册失败"
+                                });
+                            } else if (pa == "exist") {
+                                alert("no");
+                                location.href = "${pageContext.request.contextPath}/register.jsp";
+
+                                $.messager.show({
+                                    msg: "该用户名已存在"
+                                });
                             }
                         }
                     });
