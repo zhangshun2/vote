@@ -16,6 +16,12 @@ public class VoteSubjectServiceImpl implements VoteSubjectService {
     private VoteSubjectDao voteSubjectDao;
 
     @Override
+    public List<VoteSubject> selectVoteByName(String name) {
+        return voteSubjectDao.selectVoteSubjectByName(name);
+    }
+
+    ;
+    @Override
     public long getVoteSubjectRowCount() {
         return voteSubjectDao.getVoteSubjectRowCount();
     }

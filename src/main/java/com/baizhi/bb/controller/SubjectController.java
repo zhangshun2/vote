@@ -30,6 +30,42 @@ public class SubjectController {
     }
 
 
+    @RequestMapping("select")
+    @ResponseBody
+    public Object select(String name) {
+
+        List<VoteSubject> list = voteSubjectService.selectVoteByName(name);
+        ;
+        ArrayList<Object> shoalllist = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+
+            HashSet<Object> set = new HashSet<>();
+            HashSet<Object> set2 = new HashSet<>();
+            for (int j = 0; j < list.get(i).getVoteItem().size(); j++) {
+                set.add(list.get(i).getVoteItem().get(j).getViUserId());
+
+            }
+            for (int j = 0; j < list.get(i).getVoteOptions().size(); j++) {
+                set2.add(list.get(i).getVoteOptions().get(j).getVoOption());
+            }
+            int size = set.size();
+            int size2 = set2.size();
+
+            System.out.println("==========1===========");
+            System.out.println(size);
+            System.out.println(size2);
+            System.out.println("=====================");
+
+
+            VoteSubject subject = list.get(i);
+            ShowAlljson alljson = new ShowAlljson(subject.getVsTitle(), subject.getVsId(), size2, size);
+            shoalllist.add(alljson);
+        }
+
+        return shoalllist;
+    }
+
+
     @RequestMapping("showall")
     @ResponseBody
     public Object showall() {

@@ -14,13 +14,12 @@
     </appender>
 
     <!--项目中根日志 只能出现一次-->
-    <root level="info">
+    <root level="ERROR">
         <!--根日志输出位置-->
         <appender-ref ref="stdout"/>
     </root>
 
     <!--子日志多个-->
-    <logger name="com.baizhi.csa.dao" level="DEBUG"/>
-    <logger name="com.baizhi.csa.controller" level="DEBUG"/>
+    <logger name="com.baizhi.bb.dao" level="DEBUG_dao"/>
 
 </configuration>

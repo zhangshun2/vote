@@ -14,13 +14,13 @@
     <title>管理投票</title>
     <script type="text/javascript" src="js/e.js"></script>
     <script type="text/javascript">
-        $(function () {
-            manageGrid();
-            $("#manageSearch").click(function () {
-                var keywords = $('#manageKeywords').val();
-                $('#manageGrid').datagrid('load', {keywords: keywords});
-            });
-        });
+        /* $(function () {
+             manageGrid();
+             $("#manageSearch").click(function () {
+                 var keywords = $('#manageKeywords').val();
+                 $('#manageGrid').datagrid('load', {keywords: keywords});
+             });
+         });*/
 
     </script>
 </head>
@@ -28,7 +28,7 @@
 <div class="info">
     <div class="search">
         <input class="autoComplete" id="manageKeywords" type="text" name="keywords" value=""/>
-        <input id="manageSearch" class="gridSearch" type="button" name="search" value="搜索"/>
+        <input id="manageSearch" class="gridSearch" type="button" name="search" value="搜索" onclick="manageGrid()"/>
     </div>
 </div>
 <table id="manageGrid" class="easyui-datagrid"></table>

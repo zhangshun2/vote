@@ -22,6 +22,8 @@ public interface VoteSubjectService {
 
     List<VoteSubject> selectVoteSubject();
 
+    List<VoteSubject> selectVoteByName(String name);
+
     /**
      * 鑾峰緱涓�釜VoteSubject瀵硅薄,浠ュ弬鏁癡oteSubject瀵硅薄涓笉涓虹┖鐨勫睘鎬т綔涓烘潯浠惰繘琛屾煡璇�
      *
