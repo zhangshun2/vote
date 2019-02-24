@@ -112,7 +112,6 @@ public class SubjectController {
         if (subject == null || subject.getVsTitle().equals("") || voteSubDTO.getOptions() == null) {
             map.put("no", "param is null");
         } else {
-
             voteSubjectService.insertNonEmptyVoteSubject(subject);
 
             VoteSubject subject2 = voteSubjectService.selectVoteSubjectByObj(subject);
