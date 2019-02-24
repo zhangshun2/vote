@@ -119,38 +119,17 @@ public class SubjectController {
 
             Integer vsId = subject2.getVsId();
 
-
             if (options == null) {
-
                 map.put("yes", "insert subject ok");
-
             } else {
-
-
                 for (VoteOption option : options) {
-                    /**
-                     * ���ܴ��ڿ�Ƚ϶൫��û��ӵ����
-                     * ���Զ�����Щ�п�ûд���ݵ���������в���
-                     */
                     if (option.getVoOption() != null) {
-                        /**
-                         * ÿһ��ͶƱѡ��Ŀ���������ֵ
-                         * Ĭ����0��ɾ��ѡ����
-                         * ��ʾ˳����̫�鷳��������,��Ե
-                         */
                         option.setVoIsDelete("0");
                         option.setVoOrder("");
-                        /**
-                         * ��ͶƱ���ݺ�ͶƱ��ѡ��
-                         */
                         option.setVsId(vsId);
-                        /**
-                         * ��������֮ǰ��voteoption����
-                         */
                         voteOptionService.insertNonEmptyVoteOption(option);
                     }
                 }
-
 
                 map.put("yes", "insert subject options ok");
             }
