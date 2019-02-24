@@ -63,7 +63,7 @@
         <li>
             <h4><s:property value="subject.title"/></h4>
             <span class="info">共有</span> <span id="p1"></span> 个选项，已有 <span id="p2"></span> 个网友参与了投票。</span>
-            <form method="post" action="vote!save.action" onsubmit="return validate();">
+            <form method="post" action="${pageContext.request.contextPath}/vote_success.jsp"  onsubmit="return validate();">
                 <%-- <s:hidden name="subject.id"></s:hidden> --%>
                 <input type="text" hidden="hidden" name="id" id=""/>
                 <ol id="olp1">
@@ -74,9 +74,8 @@
                 </ol>
                 <p class="voteView">
                     <!-- href="vote!view.action?subject.id=<s:property value='subject.id'/> -->
-                    <a id="go1">投票</a>
-
-                    <a id="go2">查看</a>
+                    <input type="submit" value="投票1">
+                    <input type="button" value="查看 " onclick="chakan()">
                 </p>
             </form>
         </li>
@@ -89,6 +88,13 @@
 <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="js/jqueryui/jquery-ui.js"></script>
 <script>
+    function chakan(){
+        console.log(123)
+        location.href="${pageContext.request.contextPath}/index.jsp";
+    }
+
+
+
     $(function () {
         $(".voteView").children("button").button({
             icons: {

@@ -1,6 +1,7 @@
 package com.baizhi.bb.dao;
 
 import com.baizhi.bb.entity.VoteSubject;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -37,6 +38,9 @@ public interface VoteSubjectDao {
      * @return
      */
     VoteSubject selectVoteSubjectById(Integer id);
+
+
+    List<VoteSubject> selectVoteSubjectByName(@Param("name") String name);
 
     /**
      * 鎻掑叆VoteSubject鍒版暟鎹簱,鍖呮嫭null鍊�

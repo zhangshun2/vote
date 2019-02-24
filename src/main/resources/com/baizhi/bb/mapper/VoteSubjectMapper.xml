@@ -78,6 +78,14 @@
         where s.vs_id = #{id}
     </select>
 
+    <!-- 通过VoteSubject的id获得对应数据库中表的数据对象-->
+    <select id="selectVoteSubjectByName" parameterType="java.lang.String" resultMap="result_VoteSubject_Map2">
+        select
+        <include refid="vote_subject_Column2"/>
+        from vote_subject s left JOIN vote_item i on s.vs_id = i.vs_id left join vote_option o on s.vs_id = o.vs_id
+        where s.vs_title like '%${name}%'
+    </select>
+
     <!-- 将VoteSubject插入到对应数据库的表中,包括属性值为null的数据-->
 
     <insert id="insertVoteSubject" parameterType="com.baizhi.bb.entity.VoteSubject">
