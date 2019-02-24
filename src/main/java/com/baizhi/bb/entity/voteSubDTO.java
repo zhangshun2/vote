@@ -15,6 +15,7 @@ public class voteSubDTO implements Serializable {
     public voteSubDTO(List<VoteOption> options) {
         super();
         this.options = options;
+
     }
 
     public List<VoteOption> getOptions() {
@@ -27,8 +28,10 @@ public class voteSubDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "voteSubDTO [options=" + options + "]";
-    }
+        return "voteSubDTO{" +
+                "options=" + options +
+                '}';
 
+    }
 
 }

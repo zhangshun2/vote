@@ -23,6 +23,8 @@ public class VoteApplicationTests {
     @Autowired
     private VoteSubjectDao voteSubjectDao;
     @Autowired
+    private VoteItemDao voteItemDao;
+    @Autowired
     private VoteSubjectService voteSubjectService;
 
     @Test

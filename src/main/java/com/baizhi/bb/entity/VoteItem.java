@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class VoteItem implements Serializable {
     private Integer viId;
-    private Integer viUserId;
+    private Integer vuUserId;
     private Integer vsId;
     private Integer voId;
     private VoteSubject voteSubject;
@@ -21,18 +21,26 @@ public class VoteItem implements Serializable {
                     VoteSubject voteSubject) {
         super();
         this.viId = viId;
-        this.viUserId = viUserId;
+        this.vuUserId = viUserId;
         this.vsId = vsId;
         this.voId = voId;
         this.voteSubject = voteSubject;
     }
 
     public Integer getViUserId() {
-        return viUserId;
+        return vuUserId;
     }
 
     public void setViUserId(Integer viUserId) {
-        this.viUserId = viUserId;
+        this.vuUserId = viUserId;
+    }
+
+    public Integer getVuUserId() {
+        return vuUserId;
+    }
+
+    public void setVuUserId(Integer vuUserId) {
+        this.vuUserId = vuUserId;
     }
 
     public Integer getVsId() {
@@ -65,7 +73,7 @@ public class VoteItem implements Serializable {
 
     @Override
     public String toString() {
-        return "VoteItem [viId=" + viId + ", viUserId=" + viUserId + ", vsId="
+        return "VoteItem [viId=" + viId + ", viUserId=" + vuUserId + ", vsId="
                 + vsId + ", voId=" + voId + ", voteSubject=" + voteSubject
                 + "]";
     }

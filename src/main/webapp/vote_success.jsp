@@ -20,7 +20,7 @@
     <h2>提示信息</h2>
     <div class="content">
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;恭喜：投票成功！<a
-                href="vote!view.action?subject.id=<s:property value='subject.id'/>">返回查看投票结果&gt;&gt;</a></p>
+                href="${pageContext.request.contextPath}/index.jsp">返回查看投票结果&gt;&gt;</a></p>
     </div>
 </div>
 <div id="footer" class="wrap">

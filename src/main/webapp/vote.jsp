@@ -58,14 +58,14 @@
 <div id="vote" class="wrap">
     <h2>参与投票</h2>
     <!-- 用来传递页面参数的数据 -->
-    <input type="hidden" id="btn11" name="" value="${param.id}"/>
     <ul class="list">
         <li>
             <h4><s:property value="subject.title"/></h4>
             <span class="info">共有</span> <span id="p1"></span> 个选项，已有 <span id="p2"></span> 个网友参与了投票。</span>
             <form method="post" action="${pageContext.request.contextPath}/vote_success.jsp"  onsubmit="return validate();">
+                <input type="text" id="btn11" name="vsId" value="${param.id}"/>
                 <%-- <s:hidden name="subject.id"></s:hidden> --%>
-                <input type="text" hidden="hidden" name="id" id=""/>
+                vote_success.jsp
                 <ol id="olp1">
 
                     <%-- <s:iterator value="subject.options" status="status">
@@ -108,11 +108,27 @@
     })
 
     function validate() {
-        var options = $("input[name='options']:checked").val();
+        var options = $("input:checked").val();
         if (options == null || options == "undefined" || options.length == 0) {
 
             return false;
         }
+        var voId = "";
+        for (var i = 0; i < $("input:checked").length; i++) {
+            var j = $($("input:checked")[i]).val();
+            voId += "&voId=" + j;
+        }
+        var date = "vsId=" + $("[name=vsId]").val() + voId;
+        $.ajax({
+            url: "${pageContext.request.contextPath}/item/add",
+            type: "post",
+            data: date,
+            dataType: "json",
+            success: function () {
+                alert()
+                location.href = "${pageContext.request.contextPath}/vote_success.jsp";
+            }
+        });
         return true;
     }
 </script>
