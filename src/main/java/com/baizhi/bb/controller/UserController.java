@@ -45,7 +45,7 @@ public class UserController {
 
     @RequestMapping("regist")
     @ResponseBody
-    public Object regist(VoteUser user) {
+    public Object regist(VoteUser user, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         if (user == null) {
             map.put("key", "no");
@@ -62,6 +62,7 @@ public class UserController {
             int i = voteUserService.insertNonEmptyVoteUser(user);
             System.out.println(user);
             System.out.println(i);
+            session.setAttribute("user", user);
             map.put("key", "yes");
         }
         return map;
