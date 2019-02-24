@@ -17,6 +17,7 @@
                 <dt>投票内容：</dt>
                 <dd>
                     <input id="voteTitle" type="text" class="input-text" name="vsTitle" value="" title="填入投票内容"/>
+                    <span style="color:red;">*</span>
                 </dd>
                 <dt>投票类型：</dt>
                 <dd>
@@ -25,12 +26,13 @@
                 </dd>
                 <dt>投票选项：</dt>
                 <dd id="voteoptions">
-                    <p><input id="voteOption1" type="text" class="input-text" name="options[0].voOption"/></p>
-                    <p><input id="voteOption2" type="text" class="input-text" name="options[1].voOption"/></p>
+                    <p><input id="voteOption1" type="text" class="input-text" name="options[0].voOption"/><span
+                            style="color:red;">*</span></p>
+                    <p><input id="voteOption2" type="text" class="input-text" name="options[1].voOption"/><span
+                            style="color:red;">*</span></p>
                 </dd>
                 <dt></dt>
                 <dd class="button">
-
                     <a id="btn1">确定</a>
                     <a id="addOption" href="javascript:void(0);">增加选项</a>
                     <a href="${pageContext.request.contextPath}/index.jsp">取消操作</a>
@@ -81,14 +83,15 @@
 
     function validateTitle(v) {
         if (null == v || '' == v) {
-            $("#dialog-message").dialog({
+            /*$("#dialog-message").dialog({
                 modal: true,
                 buttons: {
                     Ok: function () {
                         $(this).dialog("close");
                     }
                 }
-            });
+            });*/
+            //alert("投票内容不能为空！");
             return false;
         }
         return true;
@@ -99,13 +102,26 @@
     /* 懒加载 */
     $(function () {
 
+
         /* 添加具体的信息 */
         /* 点击添加按钮提交 */
 
         $("#btn1").linkbutton({
             onClick: function () {
-                $("#formgo").form("submit");
-                location.href = "${pageContext.request.contextPath}/add_success.jsp";
+                var votet = $("#voteTitle").val();
+                var voteOption1 = $("#voteOption1").val();
+                var voteOption2 = $("#voteOption2").val();
+                if (votet == null || '' == votet || voteOption1 == null || voteOption1 == '' || voteOption2 == null || voteOption2 == '') {
+                    $.messager.show({
+                        title: "操作提示：",
+                        msg: "必填项不能为空",
+                        showSpeed: 500,
+                        timeout: 1000,
+                    });
+                } else {
+                    $("#formgo").form("submit");
+                    location.href = "${pageContext.request.contextPath}/add_success.jsp";
+                }
             }
         });
 

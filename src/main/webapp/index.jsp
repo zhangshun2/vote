@@ -45,7 +45,7 @@
             <li><a href="#tabs-1">返回列表</a></li>
             <li><a href="#tabs-2">发布新投票</a></li>
             <li><a href="manage.jsp">维护</a></li>
-            <li style="float:right;margin:5px 10px 0 0">您好，</li>
+            <li style="float:right;margin:5px 10px 0 0">您好，${sessionScope.user.vuUserName}</li>
         </ul>
         <div id="tabs-1">
             <div class="info">

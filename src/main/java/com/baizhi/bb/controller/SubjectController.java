@@ -96,7 +96,7 @@ public class SubjectController {
                      * ���ܴ��ڿ�Ƚ϶൫��û��ӵ����
                      * ���Զ�����Щ�п�ûд���ݵ���������в���
                      */
-                    if (option.getVoOption() != "") {
+                    if (option.getVoOption() != null) {
                         /**
                          * ÿһ��ͶƱѡ��Ŀ���������ֵ
                          * Ĭ����0��ɾ��ѡ����
