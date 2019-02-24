@@ -38,10 +38,24 @@
                             if (pa == "yes") {
                                 //alert("y");
                                 console.log(json);
+                                $.messager.show({
+                                    msg: "注册成功"
+                                });
                                 location.href = "${pageContext.request.contextPath}/index.jsp";
-                            } else {
-                                alert("w");
+                            } else if (pa == "no") {
+                                alert("no");
                                 location.href = "${pageContext.request.contextPath}/login.jsp";
+
+                                $.messager.show({
+                                    msg: "注册失败"
+                                });
+                            } else if (pa == "exist") {
+                                alert("no");
+                                location.href = "${pageContext.request.contextPath}/login.jsp";
+
+                                $.messager.show({
+                                    msg: "该用户名已存在"
+                                });
                             }
                         }
                     });
@@ -78,7 +92,7 @@
                            name="vuPassword" value=""/></dd>
                 <dt></dt>
                 <dd><input type="button" value="登录" id="dl"/>
-                    <a id="aa1" href="#">新用户注册</a></dd>
+                    <a id="aa1" href="${pageContext.request.contextPath}/register.jsp">新用户注册</a></dd>
             </dl>
             <!-- </form> -->
             <div class="error"></div>

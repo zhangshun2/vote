@@ -110,7 +110,7 @@
     function validate() {
         var options = $("input[name='options']:checked").val();
         if (options == null || options == "undefined" || options.length == 0) {
-            alert("请至少选择一个投票项！");
+
             return false;
         }
         return true;

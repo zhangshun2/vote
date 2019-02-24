@@ -54,6 +54,11 @@ public class UserController {
                 map.put("key", "no");
                 return map;
             }
+            VoteUser user1 = new VoteUser();
+            user1.setVuUserName(user.getVuUserName());
+            if (voteUserService.selectVoteUserByObj(user1) != null) {
+                map.put("key", "exist");
+            }
             int i = voteUserService.insertNonEmptyVoteUser(user);
             System.out.println(user);
             System.out.println(i);

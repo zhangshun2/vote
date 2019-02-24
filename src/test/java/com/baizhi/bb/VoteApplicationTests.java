@@ -1,5 +1,6 @@
 package com.baizhi.bb;
 
+import com.baizhi.bb.dao.VoteItemDao;
 import com.baizhi.bb.dao.VoteSubjectDao;
 import com.baizhi.bb.dao.VoteUserDao;
 import com.baizhi.bb.entity.VoteSubject;
@@ -18,6 +19,8 @@ public class VoteApplicationTests {
     @Autowired
     private VoteUserDao voteUserDao;
     @Autowired
+    private VoteItemDao voteItemDao;
+    @Autowired
     private VoteSubjectDao voteSubjectDao;
     @Autowired
     private VoteSubjectService voteSubjectService;
@@ -34,7 +37,8 @@ public class VoteApplicationTests {
 
     @Test
     public void test() {
-        System.out.println(12);
+
+        System.out.println(voteItemDao.selectVoteItem());
     }
 
 }
