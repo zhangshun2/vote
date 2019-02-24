@@ -63,9 +63,8 @@
             <h4><s:property value="subject.title"/></h4>
             <span class="info">共有</span> <span id="p1"></span> 个选项，已有 <span id="p2"></span> 个网友参与了投票。</span>
             <form method="post" action="${pageContext.request.contextPath}/vote_success.jsp"  onsubmit="return validate();">
-                <input type="text" id="btn11" name="vsId" value="${param.id}"/>
+                <input type="hidden" id="btn11" name="vsId" value="${param.id}"/>
                 <%-- <s:hidden name="subject.id"></s:hidden> --%>
-                vote_success.jsp
                 <ol id="olp1">
 
                     <%-- <s:iterator value="subject.options" status="status">
